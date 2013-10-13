@@ -1,4 +1,4 @@
-module StrictWrapper (f,g,h) where
+module StrictWrapper (f,g,h,s) where
 
 import           FFI
 import           Prelude
@@ -14,8 +14,12 @@ g R{i=i} = i
 h :: R -> R
 h (R i) = R (i + 1)
 
+s :: String -> String
+s = (++ " bar")
+
 main :: Fay ()
 main = do
   ffi "console.log(Strict.StrictWrapper.f(1,2))" :: Fay ()
   ffi "console.log(Strict.StrictWrapper.g({instance:'R',i:1}))" :: Fay ()
   ffi "console.log(Strict.StrictWrapper.h({instance:'R',i:1}))" :: Fay ()
+  ffi "console.log(Strict.StrictWrapper.s('foo'))" :: Fay ()
